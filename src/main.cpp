@@ -1,7 +1,9 @@
 #include <iostream>
-#include "Book.h"
+#include "MenuInterface.h"
 using namespace std;
 
 int main(){
-    cout << "HI WORLD";
+    MenuInterface mainMenu;
+    mainMenu.runMainMenuController();
+    cout << "END OF PROGRAM";
 }
