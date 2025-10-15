@@ -1,17 +1,20 @@
 #ifndef MENUINTERFACE_H
 #define MENUINTERFACE_H
 #include <string>
+#include "Book.h"
 
 class MenuInterface {
     public:
         MenuInterface();
         ~MenuInterface();
-    //Book will go here
+
     //Csv Will go here
 
         void runMainMenuController();
 
     private:
+        Book currentBook;
+
         short validateUserInput(const short lowerBound, const short upperBound,
                                 const std::string menuOptions) const;
 
