@@ -6,8 +6,7 @@ int Contact::s_id = 0;
 Contact::Contact(const std::string& name, const std::string& email, const std::string& phoneNumber,
 	const std::string& city, ContactType type)
 	: id(++s_id), name(name), email(email), phoneNumber(phoneNumber), city(city), type(type)
-{
-}
+{ }
 
 int Contact::getId() const {
 	return id;
@@ -88,10 +87,10 @@ std::ostream& operator<<(std::ostream& os, const Contact& contact)
 		<< "\nPhone Number: " << contact.phoneNumber
 		<< "\nCity: " << contact.city
 		<< "\nContact Type: " << contact.getTypeAsString()
-		<< "\nTags:";
+		<< "\nTags: ";
 
-	for (const std::string& tag : contact.tags)
-		os << " " << tag;
+	for (int i = 0; i < contact.tags.size(); ++i)
+		os << contact.tags[i] << (i < contact.tags.size() - 1 ? ", " : "");
 
 	os << "\n-------------------------\n";
 	return os;

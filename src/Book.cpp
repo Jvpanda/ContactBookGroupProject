@@ -44,6 +44,15 @@ void Book::addContact()
 	}
 
 	Contact contact{ name, email, phoneNumber, city, contactType };
+
+	std::cout << "Enter Tags (Enter Nothing To Stop): ";
+	std::string currentTag{};
+	do
+	{
+		std::getline(std::cin, currentTag);
+		contact.addTag(currentTag);
+	} while (!currentTag.empty());
+
 	contacts.emplace_back(contact);
 
 }

@@ -20,6 +20,8 @@ public:
 
 	void showContactsMissingInfo()const;
 
+	void displayGroupSummaries()const;
+
 	void searchContactByName(const std::string& name);
 	void searchContactByEmail(const std::string& email);
 	void searchContactByPhone(const std::string& phoneNumber);
