@@ -1,7 +1,7 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include "contact.h"
+#include "Contact.h"
 
 class Book
 {

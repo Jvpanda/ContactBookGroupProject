@@ -53,3 +53,38 @@ void Contact::removeTag(const std::string& tagToRemove) {
 		tags.erase(it);
 	}
 }
+
+string Contact::getTypeAsString() const
+{
+	switch (type)
+	{
+	case ContactType::Person:
+		return "Person";
+	case ContactType::Business:
+		return "Business";
+	case ContactType::Vendor:
+		return "Vendor";
+	case ContactType::Emergency:
+		return "Emergency";
+	default:
+		return "None";
+	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Contact& contact)
+{
+	os << "-------------------------"
+		<< "\nID: " << contact.id
+		<< "\nName: " << contact.name
+		<< "\nEmail: " << contact.email
+		<< "\nPhone Number: " << contact.phoneNumber
+		<< "\nCity: " << contact.city
+		<< "\nContact Type: " << contact.getTypeAsString()
+		<< "\nTags:";
+
+	for (const std::string& tag : contact.tags)
+		os << " " << tag;
+
+	os << "\n-------------------------\n";
+	return os;
+}

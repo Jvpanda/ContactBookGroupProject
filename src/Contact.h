@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 enum ContactType { Person, Business, Vendor, Emergency };
 
@@ -14,6 +15,7 @@ class Contact {
 		const std::string& getPhoneNumber() const;
 		const std::string& getCity() const;
 		ContactType getType() const;
+		std::string getTypeAsString() const;
 		const std::vector<std::string>& getTags() const;
 
 		// SETTERS
@@ -25,6 +27,8 @@ class Contact {
 		void setType(ContactType newType);
 		void addTag(const std::string& newTag);
 		void removeTag(const std::string& tagToRemove);
+
+		friend std::ostream& operator<<(std::ostream& os, const Contact& contact);
 
 	private:
 		int id;
