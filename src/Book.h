@@ -29,7 +29,7 @@ public:
 	void filterByTag(const std::string& tag);
 
 private:
-	std::vector<Contact> m_contacts;
+	std::vector<Contact> contacts;
 
 };
 

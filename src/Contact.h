@@ -4,10 +4,13 @@
 #include <algorithm>
 #include <iostream>
 
-enum ContactType { Person, Business, Vendor, Emergency };
+enum class ContactType { Person = 1, Business, Vendor, Emergency };
 
 class Contact {
 	public:
+		Contact(const std::string& name, const std::string& email, const std::string& phoneNumber,
+			const std::string& city, ContactType type);
+
 		// GETTERS
 		int getId() const;
 		const std::string& getName() const;
@@ -38,4 +41,7 @@ class Contact {
 		std::string city;
 		ContactType type;
 		std::vector<std::string> tags;
+
+	private:
+		static int s_id;
 };
