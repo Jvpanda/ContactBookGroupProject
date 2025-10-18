@@ -62,6 +62,71 @@ void Book::addContact(const Contact& contact)
 	contacts.emplace_back(contact);
 }
 
+void Book::deleteContact(int id)
+{
+	for (int i = 0; i < contacts.size(); i++) {
+		if (contacts[i].getId() == id) {
+			contacts.erase(contacts.begin() + i);
+			return;
+		}
+	}
+}
+
+void Book::printIndividualDetails(int id)const
+{
+	for (int i = 0; i < contacts.size(); i++) {
+		if (contacts[i].getId() == id) {
+			std::cout << contacts[i];
+			return;
+		}
+	}
+}
+
+void Book::listContacts()const
+{
+	for (int i = 0; i < contacts.size(); i++) {
+		std::cout << contacts[i];
+	}
+}
+
+void Book::listContactsByType(ContactType type)const
+{
+	for (int i = 0; i < contacts.size(); i++) {
+		if (contacts[i].getType() == type) {
+			std::cout << contacts[i];
+		}
+	}
+}
+
+void Book::showContactsMissingInfo()const
+{
+	for (int i = 0; i < contacts.size(); i++) {
+		if (contacts[i].getEmail().empty() || contacts[i].getPhoneNumber().empty() ||
+			contacts[i].getCity().empty()) {
+			std::cout << contacts[i];
+		}
+	}
+}
+
+void Book::displayGroupSummaries()const
+{
+	int personCount = 0, businessCount = 0, vendorCount = 0, emergencyCount = 0;
+
+	for (int i = 0; i < contacts.size(); i++) {
+		switch (contacts[i].getType()) {
+		case ContactType::Person: personCount++; break;
+		case ContactType::Business: businessCount++; break;
+		case ContactType::Vendor: vendorCount++; break;
+		case ContactType::Emergency: emergencyCount++; break;
+		}
+	}
+	std::cout << "Group Summaries:\n";
+	std::cout << "Persons: " << personCount << std::endl;
+	std::cout << "Businesses: " << businessCount << std::endl;
+	std::cout << "Vendors: " << vendorCount << std::endl;
+	std::cout << "Emergencies: " << emergencyCount << std::endl;
+}
+
 void Book::searchContactByName(const std::string& name)
 {
 	for (const Contact& contact : contacts)
