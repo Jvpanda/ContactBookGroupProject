@@ -9,6 +9,8 @@ const std::vector<Contact>& Book::getContacts()const
 	return contacts;
 }
 
+
+// Helper function to reduce duplicate code 
 Contact* Book::getContactById(int id)
 {
 	for (int i = 0; i < contacts.size(); ++i)
