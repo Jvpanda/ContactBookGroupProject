@@ -12,6 +12,12 @@ public:
 	void addContact();
 	void addContact(const Contact& contact);
 
+	void editName(int id, const std::string& newName);
+	void editEmail(int id, const std::string& newEmail);
+	void editPhoneNumber(int id, const std::string& newPhoneNumber);
+	void editCity(int id, const std::string& newCity);
+	void editType(int id, int typeAsInt);
+
 	void deleteContact(int id);
 	void printIndividualDetails(int id)const;
 
@@ -32,6 +38,9 @@ public:
 
 private:
 	std::vector<Contact> contacts;
+
+private:
+	Contact* getContactById(int id);
 
 };
 

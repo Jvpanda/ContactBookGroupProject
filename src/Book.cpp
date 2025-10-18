@@ -1,9 +1,27 @@
 #include "Book.h"
 
+// ----------------
+//  Getters
+// ----------------
+
 const std::vector<Contact>& Book::getContacts()const
 {
 	return contacts;
 }
+
+Contact* Book::getContactById(int id)
+{
+	for (int i = 0; i < contacts.size(); ++i)
+	{
+		if (contacts[i].getId() == id)
+			return &contacts[i];
+	}
+	return nullptr;
+}
+
+// ----------------
+//  Adding
+// ----------------
 
 void Book::addContact()
 {
@@ -61,6 +79,78 @@ void Book::addContact(const Contact& contact)
 {
 	contacts.emplace_back(contact);
 }
+
+// ----------------
+//  Editing
+// ----------------
+
+void Book::editName(int id, const std::string& newName)
+{
+	Contact* contact = getContactById(id);
+	if (contact == nullptr)
+		std::cout << "Error: Invalid Id\n";
+	else
+		contact->setName(newName);
+}
+
+void Book::editEmail(int id, const std::string& newEmail)
+{
+	Contact* contact = getContactById(id);
+	if (contact == nullptr)
+		std::cout << "Error: Invalid Id\n";
+	else
+		contact->setEmail(newEmail);
+}
+
+void Book::editPhoneNumber(int id, const std::string& newPhoneNumber)
+{
+	Contact* contact = getContactById(id);
+	if (contact == nullptr)
+		std::cout << "Error: Invalid Id\n";
+	else
+		contact->setPhoneNumber(newPhoneNumber);
+}
+
+void Book::editCity(int id, const std::string& newCity)
+{
+	Contact* contact = getContactById(id);
+	if (contact == nullptr)
+		std::cout << "Error: Invalid Id\n";
+	else
+		contact->setCity(newCity);
+}
+
+void Book::editType(int id, int typeAsInt)
+{
+	Contact* contact = getContactById(id);
+	if (contact == nullptr)
+		std::cout << "Error: Invalid Id\n";
+	else
+	{
+		switch (typeAsInt)
+		{
+		case 1:
+			contact->setType(ContactType::Person);
+			break;
+		case 2:
+			contact->setType(ContactType::Business);
+			break;
+		case 3:
+			contact->setType(ContactType::Vendor);
+			break;
+		case 4:
+			contact->setType(ContactType::Emergency);
+			break;
+		default:
+			std::cout << "Error: Invalid Type\n";
+			break;
+		}
+	}
+}
+
+// ----------------
+//  Misc
+// ----------------
 
 void Book::deleteContact(int id)
 {
@@ -127,6 +217,10 @@ void Book::displayGroupSummaries()const
 	std::cout << "Emergencies: " << emergencyCount << std::endl;
 }
 
+// ----------------
+//  Searches
+// ----------------
+
 void Book::searchContactByName(const std::string& name)
 {
 	for (const Contact& contact : contacts)
@@ -151,6 +245,10 @@ void Book::searchContactByPhone(const std::string& phoneNumber)
 			std::cout << contact << "\n";
 	}
 }
+
+// ----------------
+//  Filters
+// ----------------
 
 void Book::filterByType(ContactType type)
 {
