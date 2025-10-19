@@ -9,7 +9,7 @@ class Contact {
 	public:
 		Contact(const int id, const std::string& name, const std::string& email, const std::string& phoneNumber,
 			const std::string& city, ContactType type);
-                Contact();
+        Contact();
 
 		// GETTERS
 		int getId() const;
@@ -41,6 +41,4 @@ class Contact {
 		std::string city;
 		ContactType type;
 		std::vector<std::string> tags;
-
-	private:
 };
