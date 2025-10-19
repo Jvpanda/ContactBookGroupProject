@@ -1,48 +1,71 @@
 #include "MenuInterface.h"
+#include "Contact.h"
 #include <ios>
 #include <iostream>
 #include <limits>
+#include <string>
 using namespace std;
 
-MenuInterface::MenuInterface(){}
-MenuInterface::~MenuInterface(){}
+MenuInterface::MenuInterface() {}
+MenuInterface::~MenuInterface() {}
 
-void MenuInterface::runMainMenuController(){
-    short input = validateUserInput(0, 11, menuList);
-    switch(input){
-        case 0:
-            return;
-        break;
-        case 1:
-        break;
-        case 2:
-        break;
-        case 3:
-        break;
-        case 4:
-        break;
-        case 5:
-        break;
-        case 6:
-        break;
-        case 7:
-        break;
-        case 8:
-        break;
-        case 9:
-        break;
-        case 10:
-        break;
-        case 11:
-        break;
-    }
+void MenuInterface::runMainMenuController() {
+    int input = 1;
+    do {
+        input = validateUserInput(0, 11, menuList);
+        switch (input) {
+            case 0:
+                return;
+                break;
+            case 1:
+                CSV.loadCSV(currentBook);
+                break;
+            case 2:
+                CSV.saveCSV(currentBook);
+                break;
+            case 3:
+                currentBook.addContact();
+                break;
+            case 4:
+                // currentBook.editContact(id)
+                break;
+            case 5:
+                {
+                    // int id = validateUserInput(0, 2147483647,
+                    // "Choose an ID to delete: ");
+                    // currentBook.deleteContact(id);
+                }
+                break;
+            case 6:
+                // currentBook.listContacts();
+                break;
+            case 7:
+                searchMenu();
+                break;
+            case 8:
+                filterMenu();
+                break;
+            case 9:
+                { /*
+                    ContactType type = getTypeFromInput();
+                     currentBook.listContactsByType(type);
+                     */
+                }
+                break;
+            case 10:
+                // currentBook.showContactsMissingInfo();
+                break;
+            case 11:
+                // currentBook.displayGroupSummaries();
+                break;
+        }
+    } while (input != 0);
 }
 
-short MenuInterface::validateUserInput(const short lowerBound,
-                                         const short upperBound,
-                                         const std::string menuOptions) const {
+int MenuInterface::validateUserInput(const int lowerBound, const int upperBound,
+                                     const std::string menuOptions) const {
     bool valid;
-    short input;
+    int input;
     streamsize maxCharLimit = numeric_limits<streamsize>::max();
 
     valid = false;
@@ -68,6 +91,59 @@ short MenuInterface::validateUserInput(const short lowerBound,
         }
 
     } while (!valid);
+    cin.ignore(1, '\n');
 
     return input;
+}
+
+ContactType MenuInterface::getTypeFromInput() {
+    ContactType type;
+    type = (ContactType)validateUserInput(
+        1, 4,
+        "Enter Contact Type (1 = Person, 2 = "
+        "Business, 3 = Vendor, 4 = Emergency): ");
+    return type;
+}
+
+void MenuInterface::searchMenu() {
+    string search;
+    int searchChoice =
+        validateUserInput(1, 4,
+                          "Search by:\n1 - Name\n2 - Email\n3 - Phone "
+                          "Number\nEnter: ");
+    cout << "Please enter your search: ";
+    getline(cin, search);
+    switch (searchChoice) {
+        case 1:
+            currentBook.searchContactByName(search);
+            break;
+        case 2:
+            currentBook.searchContactByEmail(search);
+            break;
+        case 3:
+            currentBook.searchContactByPhone(search);
+            break;
+    }
+}
+
+void MenuInterface::filterMenu() {
+    string filter;
+    int searchChoice = validateUserInput(
+        1, 4, "Filter by:\n1 - City\n2 - Tag\n3 - Type\nEnter: ");
+    switch (searchChoice) {
+        case 1:
+            cout << "Please enter the city: ";
+            getline(cin, filter);
+            currentBook.filterByCity(filter);
+            break;
+        case 2:
+            cout << "Please enter the Tag: ";
+            getline(cin, filter);
+            currentBook.filterByTag(filter);
+            break;
+        case 3:
+            ContactType type = getTypeFromInput();
+            currentBook.filterByType(type);
+            break;
+    }
 }
