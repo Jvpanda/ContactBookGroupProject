@@ -1,22 +1,26 @@
 #ifndef MENUINTERFACE_H
 #define MENUINTERFACE_H
-#include <string>
 #include "Book.h"
+#include "CSVFileIO.h"
+#include <string>
 
 class MenuInterface {
     public:
         MenuInterface();
         ~MenuInterface();
-
-    //Csv Will go here
+        CSVHandler CSV;
 
         void runMainMenuController();
+        Book &getCurrentBook();
 
     private:
         Book currentBook;
 
-        short validateUserInput(const short lowerBound, const short upperBound,
-                                const std::string menuOptions) const;
+        int validateUserInput(const int lowerBound, const int upperBound,
+                              const std::string menuOptions) const;
+        ContactType getTypeFromInput();
+        void searchMenu();
+        void filterMenu();
 
         const std::string menuList = "0 - Exit\n"
                                      "1 - Load New File\n"

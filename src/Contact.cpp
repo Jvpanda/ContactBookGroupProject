@@ -1,12 +1,12 @@
 #include "Contact.h"
 using namespace std;
 
-int Contact::s_id = 0;
-
-Contact::Contact(const std::string& name, const std::string& email, const std::string& phoneNumber,
+Contact::Contact(const int id, const std::string& name, const std::string& email, const std::string& phoneNumber,
 	const std::string& city, ContactType type)
-	: id(++s_id), name(name), email(email), phoneNumber(phoneNumber), city(city), type(type)
+	: id(id), name(name), email(email), phoneNumber(phoneNumber), city(city), type(type)
 { }
+
+Contact::Contact(): id(0), name(""), email(""), phoneNumber(""), city(""), type(ContactType::Person) {}
 
 int Contact::getId() const {
 	return id;

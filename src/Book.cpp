@@ -27,10 +27,14 @@ Contact* Book::getContactById(int id)
 
 void Book::addContact()
 {
+        int id = 0;
 	std::string name, email, phoneNumber, city;
 	int contactTypeInt;
 	ContactType contactType;
 
+	std::cout << "Enter ID: ";
+        std::cin >> id;
+        std::cin.ignore('\n');
 	std::cout << "Enter Name: ";
 	std::getline(std::cin, name);
 
@@ -63,7 +67,7 @@ void Book::addContact()
 		break;
 	}
 
-	Contact contact{ name, email, phoneNumber, city, contactType };
+	Contact contact{id, name, email, phoneNumber, city, contactType };
 
 	std::cout << "Enter Tags (Enter Nothing To Stop): ";
 	std::string currentTag{};
