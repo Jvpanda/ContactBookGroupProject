@@ -1,15 +1,15 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <iostream>
 
 enum class ContactType { Person = 1, Business, Vendor, Emergency };
 
 class Contact {
 	public:
-		Contact(const std::string& name, const std::string& email, const std::string& phoneNumber,
+		Contact(const int id, const std::string& name, const std::string& email, const std::string& phoneNumber,
 			const std::string& city, ContactType type);
+                Contact();
 
 		// GETTERS
 		int getId() const;
@@ -43,5 +43,4 @@ class Contact {
 		std::vector<std::string> tags;
 
 	private:
-		static int s_id;
 };
