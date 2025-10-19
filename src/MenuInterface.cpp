@@ -27,17 +27,17 @@ void MenuInterface::runMainMenuController() {
                 currentBook.addContact();
                 break;
             case 4:
-                // currentBook.editContact(id)
+                editMenu();
                 break;
             case 5:
                 {
-                    // int id = validateUserInput(0, 2147483647,
-                    // "Choose an ID to delete: ");
-                    // currentBook.deleteContact(id);
+                    int id = validateUserInput(0, 2147483647,
+                                               "Choose an ID to delete: ");
+                    currentBook.deleteContact(id);
                 }
                 break;
             case 6:
-                // currentBook.listContacts();
+                currentBook.listContacts();
                 break;
             case 7:
                 searchMenu();
@@ -46,17 +46,16 @@ void MenuInterface::runMainMenuController() {
                 filterMenu();
                 break;
             case 9:
-                { /*
+                {
                     ContactType type = getTypeFromInput();
-                     currentBook.listContactsByType(type);
-                     */
+                    currentBook.listContactsByType(type);
                 }
                 break;
             case 10:
-                // currentBook.showContactsMissingInfo();
+                currentBook.showContactsMissingInfo();
                 break;
             case 11:
-                // currentBook.displayGroupSummaries();
+                currentBook.displayGroupSummaries();
                 break;
         }
     } while (input != 0);
@@ -100,8 +99,8 @@ ContactType MenuInterface::getTypeFromInput() {
     ContactType type;
     type = (ContactType)validateUserInput(
         1, 4,
-        "Enter Contact Type (1 = Person, 2 = "
-        "Business, 3 = Vendor, 4 = Emergency): ");
+        "Enter Contact Type:\n1 - Person\n2 - "
+        "Business\n3 - Vendor\n4 - Emergency\nType: ");
     return type;
 }
 
@@ -128,9 +127,9 @@ void MenuInterface::searchMenu() {
 
 void MenuInterface::filterMenu() {
     string filter;
-    int searchChoice = validateUserInput(
-        1, 4, "Filter by:\n1 - City\n2 - Tag\n3 - Type\nEnter: ");
-    switch (searchChoice) {
+    int filterChoice = validateUserInput(
+        1, 3, "Filter by:\n1 - City\n2 - Tag\n3 - Type\nEnter: ");
+    switch (filterChoice) {
         case 1:
             cout << "Please enter the city: ";
             getline(cin, filter);
@@ -144,6 +143,39 @@ void MenuInterface::filterMenu() {
         case 3:
             ContactType type = getTypeFromInput();
             currentBook.filterByType(type);
+            break;
+    }
+}
+void MenuInterface::editMenu() {
+    int id         = validateUserInput(0, 2147483647, "Choose an ID to edit: ");
+    int editChoice = validateUserInput(1, 5,
+                                       "Edit:\n1 - Name\n2 - Email\n3 - Phone "
+                                       "Number\n4 - City\n5 - Type\nEnter: ");
+    string newData;
+    switch (editChoice) {
+        case 1:
+            cout << "New Name: ";
+            getline(cin, newData);
+            currentBook.editName(id, newData);
+            break;
+        case 2:
+            cout << "New Email: ";
+            getline(cin, newData);
+            currentBook.editEmail(id, newData);
+            break;
+        case 3:
+            cout << "New Phone Number: ";
+            getline(cin, newData);
+            currentBook.editPhoneNumber(id, newData);
+            break;
+        case 4:
+            cout << "New City: ";
+            getline(cin, newData);
+            currentBook.editCity(id, newData);
+            break;
+        case 5:
+            ContactType type = getTypeFromInput();
+            currentBook.editType(id, (int)type);
             break;
     }
 }

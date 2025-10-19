@@ -21,6 +21,7 @@ class MenuInterface {
         ContactType getTypeFromInput();
         void searchMenu();
         void filterMenu();
+        void editMenu();
 
         const std::string menuList = "0 - Exit\n"
                                      "1 - Load New File\n"
