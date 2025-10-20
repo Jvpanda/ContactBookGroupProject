@@ -17,22 +17,28 @@ void CSVHandler::loadCSV(Book &currentBook) {
         return;
     }
 
-    string id, name, email, phoneNumber, city, contactTypeString, tag;
+    int noIDDecrementCount = 0;
+    int id                 = 0;
+    string idString, name, email, phoneNumber, city, contactTypeString, tag;
     string line;
 
     while (getline(inputFile, line)) {
         Contact currentContact;
         stringstream lineSS(line);
 
-        getline(lineSS, id, ',');
-        if(id == "")
-            id = "-1";
+        getline(lineSS, idString, ',');
         getline(lineSS, name, ',');
         getline(lineSS, email, ',');
         getline(lineSS, phoneNumber, ',');
         getline(lineSS, city, ',');
         getline(lineSS, contactTypeString, ',');
-        currentContact.setId(stoi(id));
+
+        if (idString == "") {
+            id = --noIDDecrementCount;
+        } else {
+            id = stoi(idString);
+        }
+        currentContact.setId(id);
         currentContact.setName(name);
         currentContact.setEmail(email);
         currentContact.setPhoneNumber(phoneNumber);
@@ -62,7 +68,11 @@ void CSVHandler::saveCSV(const Book &currentBook) {
     }
 
     for (const Contact &contact : currentBook.getContacts()) {
-        outputFile << contact.getId() << ",";
+        if (contact.getId() < 0) {
+            outputFile << ",";
+        } else {
+            outputFile << contact.getId() << ",";
+        }
         outputFile << contact.getName() << ",";
         outputFile << contact.getEmail() << ",";
         outputFile << contact.getPhoneNumber() << ",";
