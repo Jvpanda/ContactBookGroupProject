@@ -27,14 +27,14 @@ Contact* Book::getContactById(int id)
 
 void Book::addContact()
 {
-        int id = 0;
+	int id = 0;
 	std::string name, email, phoneNumber, city;
 	int contactTypeInt;
 	ContactType contactType;
 
 	std::cout << "Enter ID: ";
-        std::cin >> id;
-        std::cin.ignore('\n');
+	std::cin >> id;
+	std::cin.ignore('\n');
 	std::cout << "Enter Name: ";
 	std::getline(std::cin, name);
 
@@ -67,7 +67,7 @@ void Book::addContact()
 		break;
 	}
 
-	Contact contact{id, name, email, phoneNumber, city, contactType };
+	Contact contact{ id, name, email, phoneNumber, city, contactType };
 
 	std::cout << "Enter Tags (Enter Nothing To Stop): ";
 	std::string currentTag{};
@@ -158,71 +158,82 @@ void Book::editType(int id, int typeAsInt)
 //  Misc
 // ----------------
 
- for (auto it = contacts.begin(); it != contacts.end(); it++)
-  {
-    if (it->getId() == id)
-    {
-      contacts.erase(it);
-      return;
-    }
-  }
+void Book::deleteContact(int id)
+{
+	for (auto it = contacts.begin(); it != contacts.end(); it++)
+	{
+		if (it->getId() == id)
+		{
+			contacts.erase(it);
+			return;
+		}
+	}
+}
+
 void Book::printIndividualDetails(int id) const
-for (const Contact& contact : contacts)
-  {
-    if (contact.getId() == id)
-    {
-      std::cout << contact;
-      return;
-    }
-  }
+{
+	for (const Contact& contact : contacts)
+	{
+		if (contact.getId() == id)
+		{
+			std::cout << contact;
+			return;
+		}
+	}
+}
 
 void Book::listContacts() const
-for (const Contact& contact : contacts)
-  {
-    std::cout << contact;
-  }
+{
+	for (const Contact& contact : contacts)
+	{
+		std::cout << contact;
+	}
+}
 
 void Book::listContactsByType(ContactType type)const
- for (const Contact& contact : contacts)
-  {
-    if (contact.getType() == type)
-    {
-      std::cout << contact;
-    }
-  }
+{
+	for (const Contact& contact : contacts)
+	{
+		if (contact.getType() == type)
+		{
+			std::cout << contact;
+		}
+	}
+}
 
 void Book::showContactsMissingInfo()const
- for (const Contact& contact : contacts)
-  {
-    if (contact.getEmail().empty() || contact.getPhoneNumber().empty() ||
-        contact.getCity().empty())
-    {
-      std::cout << contact;
-    }
-  }
+{
+	for (const Contact& contact : contacts)
+	{
+		if (contact.getEmail().empty() || contact.getPhoneNumber().empty() ||
+			contact.getCity().empty())
+		{
+			std::cout << contact;
+		}
+	}
+}
 
 void Book::displayGroupSummaries()const
 {
 	int personCount = 0, businessCount = 0, vendorCount = 0, emergencyCount = 0;
 
-  for (const Contact& contact : contacts)
-  {
-    if (contact.getType() == ContactType::Person)
-      personCount++;
-    else if (contact.getType() == ContactType::Business)
-      businessCount++;
-    else if (contact.getType() == ContactType::Vendor)
-      vendorCount++;
-    else if (contact.getType() == ContactType::Emergency)
-      emergencyCount++;
-  }
-}
+	for (const Contact& contact : contacts)
+	{
+		if (contact.getType() == ContactType::Person)
+			personCount++;
+		else if (contact.getType() == ContactType::Business)
+			businessCount++;
+		else if (contact.getType() == ContactType::Vendor)
+			vendorCount++;
+		else if (contact.getType() == ContactType::Emergency)
+			emergencyCount++;
+	}
 
-  std::cout << "Group Summaries:\n";
-  std::cout << "Persons: " << personCount << std::endl;
-  std::cout << "Businesses: " << businessCount << std::endl;
-  std::cout << "Vendors: " << vendorCount << std::endl;
-  std::cout << "Emergencies: " << emergencyCount << std::endl;
+	std::cout << "Group Summaries:\n";
+	std::cout << "Persons: " << personCount << std::endl;
+	std::cout << "Businesses: " << businessCount << std::endl;
+	std::cout << "Vendors: " << vendorCount << std::endl;
+	std::cout << "Emergencies: " << emergencyCount << std::endl;
 }
 
 // ----------------
