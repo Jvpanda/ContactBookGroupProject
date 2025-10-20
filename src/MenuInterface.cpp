@@ -12,7 +12,7 @@ MenuInterface::~MenuInterface() {}
 void MenuInterface::runMainMenuController() {
     int input = 1;
     do {
-        input = validateUserInput(0, 11, menuList);
+        input = Utils::validateUserInput(0, 11, menuList);
         switch (input) {
             case 0:
                 return;
@@ -31,7 +31,7 @@ void MenuInterface::runMainMenuController() {
                 break;
             case 5:
                 {
-                    int id = validateUserInput(0, 2147483647,
+                    int id = Utils::validateUserInput(0, 2147483647,
                                                "Choose an ID to delete: ");
                     currentBook.deleteContact(id);
                 }
@@ -61,44 +61,9 @@ void MenuInterface::runMainMenuController() {
     } while (input != 0);
 }
 
-int MenuInterface::validateUserInput(const int lowerBound, const int upperBound,
-                                     const std::string menuOptions) const {
-    bool valid;
-    int input;
-    streamsize maxCharLimit = numeric_limits<streamsize>::max();
-
-    valid = false;
-    input = -1;
-
-    do {
-        cout << menuOptions;
-        if (!(cin >> input)) {
-            cin.clear();
-            cin.ignore(maxCharLimit, '\n');
-            valid = false;
-            cout << "\n**** Please enter a NUMBER between " << lowerBound << "-"
-                 << upperBound << " ****\n\n";
-        } else if (input < lowerBound || input > upperBound) {
-            cin.ignore(maxCharLimit, '\n');
-            valid = false;
-            cout << "\n**** The number " << input
-                 << " is an invalid entry ****";
-            cout << "\n**** Please enter a number between " << lowerBound << "-"
-                 << upperBound << " ****\n\n";
-        } else {
-            valid = true;
-        }
-
-    } while (!valid);
-    cin.ignore(1, '\n');
-    std::cout << "\n";
-
-    return input;
-}
-
 ContactType MenuInterface::getTypeFromInput() {
     ContactType type;
-    type = (ContactType)validateUserInput(
+    type = (ContactType)Utils::validateUserInput(
         1, 4,
         "Enter Contact Type:\n1 - Person\n2 - "
         "Business\n3 - Vendor\n4 - Emergency\nType: ");
@@ -108,7 +73,7 @@ ContactType MenuInterface::getTypeFromInput() {
 void MenuInterface::searchMenu() {
     string search;
     int searchChoice =
-        validateUserInput(1, 4,
+        Utils::validateUserInput(1, 4,
                           "Search by:\n1 - Name\n2 - Email\n3 - Phone "
                           "Number\nEnter: ");
     cout << "Please enter your search: ";
@@ -128,7 +93,7 @@ void MenuInterface::searchMenu() {
 
 void MenuInterface::filterMenu() {
     string filter;
-    int filterChoice = validateUserInput(
+    int filterChoice = Utils::validateUserInput(
         1, 3, "Filter by:\n1 - City\n2 - Tag\n3 - Type\nEnter: ");
     switch (filterChoice) {
         case 1:
@@ -148,8 +113,8 @@ void MenuInterface::filterMenu() {
     }
 }
 void MenuInterface::editMenu() {
-    int id         = validateUserInput(0, 2147483647, "Choose an ID to edit: ");
-    int editChoice = validateUserInput(1, 5,
+    int id         = Utils::validateUserInput(0, 2147483647, "Choose an ID to edit: ");
+    int editChoice = Utils::validateUserInput(1, 5,
                                        "Edit:\n1 - Name\n2 - Email\n3 - Phone "
                                        "Number\n4 - City\n5 - Type\nEnter: ");
     string newData;

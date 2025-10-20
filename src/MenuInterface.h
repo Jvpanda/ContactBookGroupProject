@@ -1,5 +1,6 @@
 #ifndef MENUINTERFACE_H
 #define MENUINTERFACE_H
+
 #include "Book.h"
 #include "CSVFileIO.h"
 #include <string>
@@ -16,8 +17,6 @@ class MenuInterface {
     private:
         Book currentBook;
 
-        int validateUserInput(const int lowerBound, const int upperBound,
-                              const std::string menuOptions) const;
         ContactType getTypeFromInput();
         void searchMenu();
         void filterMenu();

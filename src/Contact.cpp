@@ -6,7 +6,7 @@ Contact::Contact(const int id, const std::string& name, const std::string& email
 	: id(id), name(name), email(email), phoneNumber(phoneNumber), city(city), type(type)
 { }
 
-Contact::Contact(): id(0), name(""), email(""), phoneNumber(""), city(""), type(ContactType::Person) {}
+Contact::Contact() : id(0), name(""), email(""), phoneNumber(""), city(""), type(ContactType::Person) {}
 
 int Contact::getId() const {
 	return id;

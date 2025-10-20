@@ -27,14 +27,13 @@ Contact* Book::getContactById(int id)
 
 void Book::addContact()
 {
-	int id = 0;
+	int id;
 	std::string name, email, phoneNumber, city;
 	int contactTypeInt;
 	ContactType contactType;
 
-	std::cout << "Enter ID: ";
-	std::cin >> id;
-	std::cin.ignore();
+	id = Utils::validateUserInput(0, 2147483647, "Enter ID: ");
+
 	std::cout << "Enter Name: ";
 	std::getline(std::cin, name);
 
@@ -47,9 +46,8 @@ void Book::addContact()
 	std::cout << "Enter City: ";
 	std::getline(std::cin, city);
 
-	std::cout << "Enter Contact Type (1 = Person, 2 = Business, 3 = Vendor, 4 = Emergency): ";
-	std::cin >> contactTypeInt;
-	std::cin.ignore();
+	contactTypeInt = Utils::validateUserInput(1, 4, "Enter Contact Type (1 = Person, 2 = Business, 3 = Vendor, 4 = Emergency): ");
+	
 
 	switch (contactTypeInt)
 	{

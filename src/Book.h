@@ -2,6 +2,7 @@
 #define BOOK_H
 
 #include "Contact.h"
+#include "Utils.h"
 #include <type_traits>
 
 class Book
