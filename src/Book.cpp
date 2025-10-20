@@ -167,8 +167,8 @@ void Book::listContactsByType(ContactType type)const
 
 void Book::showContactsMissingInfo()const
 {
-        std::cout << "\nContacts with Missing Info\n-------------------------\n";
-        std::cout << "ID < 0 means no valid ID could be found\n";
+    std::cout << "\nContacts with Missing Info\n\n";
+
 	for (const Contact& contact : contacts)
 	{
 		if (contact.getEmail() == "" || contact.getPhoneNumber() == "")
@@ -195,11 +195,11 @@ void Book::displayGroupSummaries()const
 			emergencyCount++;
 	}
 
-	std::cout << "Group Summaries:\n";
+	std::cout << "Group Summaries:\n\n";
 	std::cout << "Persons: " << personCount << std::endl;
 	std::cout << "Businesses: " << businessCount << std::endl;
 	std::cout << "Vendors: " << vendorCount << std::endl;
-	std::cout << "Emergencies: " << emergencyCount << std::endl;
+	std::cout << "Emergencies: " << emergencyCount << std::endl << std::endl;
 }
 
 // ----------------
