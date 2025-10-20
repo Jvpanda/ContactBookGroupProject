@@ -34,14 +34,14 @@ void Book::addContact()
 
 	std::cout << "Enter ID: ";
 	std::cin >> id;
-	std::cin.ignore('\n');
+	std::cin.ignore();
 	std::cout << "Enter Name: ";
 	std::getline(std::cin, name);
 
 	std::cout << "Enter Email: ";
 	std::getline(std::cin, email);
 
-	std::cout << "Enter phoneNumber: ";
+	std::cout << "Enter Phone Number: ";
 	std::getline(std::cin, phoneNumber);
 
 	std::cout << "Enter City: ";
