@@ -91,6 +91,7 @@ int MenuInterface::validateUserInput(const int lowerBound, const int upperBound,
 
     } while (!valid);
     cin.ignore(1, '\n');
+    std::cout << "\n";
 
     return input;
 }
