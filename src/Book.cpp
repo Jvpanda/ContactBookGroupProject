@@ -158,69 +158,71 @@ void Book::editType(int id, int typeAsInt)
 //  Misc
 // ----------------
 
-void Book::deleteContact(int id)
-{
-	for (int i = 0; i < contacts.size(); i++) {
-		if (contacts[i].getId() == id) {
-			contacts.erase(contacts.begin() + i);
-			return;
-		}
-	}
-}
+ for (auto it = contacts.begin(); it != contacts.end(); it++)
+  {
+    if (it->getId() == id)
+    {
+      contacts.erase(it);
+      return;
+    }
+  }
+void Book::printIndividualDetails(int id) const
+for (const Contact& contact : contacts)
+  {
+    if (contact.getId() == id)
+    {
+      std::cout << contact;
+      return;
+    }
+  }
 
-void Book::printIndividualDetails(int id)const
-{
-	for (int i = 0; i < contacts.size(); i++) {
-		if (contacts[i].getId() == id) {
-			std::cout << contacts[i];
-			return;
-		}
-	}
-}
-
-void Book::listContacts()const
-{
-	for (int i = 0; i < contacts.size(); i++) {
-		std::cout << contacts[i];
-	}
-}
+void Book::listContacts() const
+for (const Contact& contact : contacts)
+  {
+    std::cout << contact;
+  }
 
 void Book::listContactsByType(ContactType type)const
-{
-	for (int i = 0; i < contacts.size(); i++) {
-		if (contacts[i].getType() == type) {
-			std::cout << contacts[i];
-		}
-	}
-}
+ for (const Contact& contact : contacts)
+  {
+    if (contact.getType() == type)
+    {
+      std::cout << contact;
+    }
+  }
 
 void Book::showContactsMissingInfo()const
-{
-	for (int i = 0; i < contacts.size(); i++) {
-		if (contacts[i].getEmail().empty() || contacts[i].getPhoneNumber().empty() ||
-			contacts[i].getCity().empty()) {
-			std::cout << contacts[i];
-		}
-	}
-}
+ for (const Contact& contact : contacts)
+  {
+    if (contact.getEmail().empty() || contact.getPhoneNumber().empty() ||
+        contact.getCity().empty())
+    {
+      std::cout << contact;
+    }
+  }
 
 void Book::displayGroupSummaries()const
 {
 	int personCount = 0, businessCount = 0, vendorCount = 0, emergencyCount = 0;
 
-	for (int i = 0; i < contacts.size(); i++) {
-		switch (contacts[i].getType()) {
-		case ContactType::Person: personCount++; break;
-		case ContactType::Business: businessCount++; break;
-		case ContactType::Vendor: vendorCount++; break;
-		case ContactType::Emergency: emergencyCount++; break;
-		}
-	}
-	std::cout << "Group Summaries:\n";
-	std::cout << "Persons: " << personCount << std::endl;
-	std::cout << "Businesses: " << businessCount << std::endl;
-	std::cout << "Vendors: " << vendorCount << std::endl;
-	std::cout << "Emergencies: " << emergencyCount << std::endl;
+  for (const Contact& contact : contacts)
+  {
+    if (contact.getType() == ContactType::Person)
+      personCount++;
+    else if (contact.getType() == ContactType::Business)
+      businessCount++;
+    else if (contact.getType() == ContactType::Vendor)
+      vendorCount++;
+    else if (contact.getType() == ContactType::Emergency)
+      emergencyCount++;
+  }
+}
+
+  std::cout << "Group Summaries:\n";
+  std::cout << "Persons: " << personCount << std::endl;
+  std::cout << "Businesses: " << businessCount << std::endl;
+  std::cout << "Vendors: " << vendorCount << std::endl;
+  std::cout << "Emergencies: " << emergencyCount << std::endl;
 }
 
 // ----------------
