@@ -12,7 +12,6 @@ class MenuInterface {
         CSVHandler CSV;
 
         void runMainMenuController();
-        Book &getCurrentBook();
 
     private:
         Book currentBook;
