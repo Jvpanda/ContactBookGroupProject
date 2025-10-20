@@ -1,5 +1,6 @@
 #include "MenuInterface.h"
 #include "Contact.h"
+#include "Utils.h"
 #include <ios>
 #include <iostream>
 #include <limits>
@@ -31,8 +32,8 @@ void MenuInterface::runMainMenuController() {
                 break;
             case 5:
                 {
-                    int id = Utils::validateUserInput(0, 2147483647,
-                                               "Choose an ID to delete: ");
+                    int id = Utils::validateUserInput(
+                        0, 2147483647, "Choose an ID to delete: ");
                     currentBook.deleteContact(id);
                 }
                 break;
@@ -47,7 +48,7 @@ void MenuInterface::runMainMenuController() {
                 break;
             case 9:
                 {
-                    ContactType type = getTypeFromInput();
+                    ContactType type = Utils::getTypeFromInput();
                     currentBook.listContactsByType(type);
                 }
                 break;
@@ -61,21 +62,16 @@ void MenuInterface::runMainMenuController() {
     } while (input != 0);
 }
 
-ContactType MenuInterface::getTypeFromInput() {
-    ContactType type;
-    type = (ContactType)Utils::validateUserInput(
-        1, 4,
-        "Enter Contact Type:\n1 - Person\n2 - "
-        "Business\n3 - Vendor\n4 - Emergency\nType: ");
-    return type;
-}
+/*************************
+    Sub Menu Functions
+**************************/
 
 void MenuInterface::searchMenu() {
     string search;
     int searchChoice =
         Utils::validateUserInput(1, 4,
-                          "Search by:\n1 - Name\n2 - Email\n3 - Phone "
-                          "Number\nEnter: ");
+                                 "Search by:\n1 - Name\n2 - Email\n3 - Phone "
+                                 "Number\nEnter: ");
     cout << "Please enter your search: ";
     getline(cin, search);
     switch (searchChoice) {
@@ -107,16 +103,17 @@ void MenuInterface::filterMenu() {
             currentBook.filterByTag(filter);
             break;
         case 3:
-            ContactType type = getTypeFromInput();
+            ContactType type = Utils::getTypeFromInput();
             currentBook.filterByType(type);
             break;
     }
 }
 void MenuInterface::editMenu() {
-    int id         = Utils::validateUserInput(0, 2147483647, "Choose an ID to edit: ");
-    int editChoice = Utils::validateUserInput(1, 5,
-                                       "Edit:\n1 - Name\n2 - Email\n3 - Phone "
-                                       "Number\n4 - City\n5 - Type\nEnter: ");
+    int id = Utils::validateUserInput(0, 2147483647, "Choose an ID to edit: ");
+    int editChoice =
+        Utils::validateUserInput(1, 5,
+                                 "Edit:\n1 - Name\n2 - Email\n3 - Phone "
+                                 "Number\n4 - City\n5 - Type\nEnter: ");
     string newData;
     switch (editChoice) {
         case 1:
@@ -140,8 +137,8 @@ void MenuInterface::editMenu() {
             currentBook.editCity(id, newData);
             break;
         case 5:
-            ContactType type = getTypeFromInput();
-            currentBook.editType(id, (int)type);
+            ContactType type = Utils::getTypeFromInput();
+            currentBook.editType(id, type);
             break;
     }
 }

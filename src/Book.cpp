@@ -1,4 +1,6 @@
 #include "Book.h"
+#include "Utils.h"
+#include "Contact.h"
 
 // ----------------
 //  Getters
@@ -29,8 +31,7 @@ void Book::addContact()
 {
 	int id;
 	std::string name, email, phoneNumber, city;
-	int contactTypeInt;
-	ContactType contactType;
+	ContactType contactTypeVariable;
 
 	id = Utils::validateUserInput(0, 2147483647, "Enter ID: ");
 
@@ -46,26 +47,10 @@ void Book::addContact()
 	std::cout << "Enter City: ";
 	std::getline(std::cin, city);
 
-	contactTypeInt = Utils::validateUserInput(1, 4, "Enter Contact Type (1 = Person, 2 = Business, 3 = Vendor, 4 = Emergency): ");
+	contactTypeVariable = Utils::getTypeFromInput();
 	
 
-	switch (contactTypeInt)
-	{
-	case 1:
-		contactType = ContactType::Person;
-		break;
-	case 2:
-		contactType = ContactType::Business;
-		break;
-	case 3:
-		contactType = ContactType::Vendor;
-		break;
-	case 4:
-		contactType = ContactType::Emergency;
-		break;
-	}
-
-	Contact contact{ id, name, email, phoneNumber, city, contactType };
+	Contact contact{ id, name, email, phoneNumber, city, contactTypeVariable };
 
 	std::cout << "Enter Tags (Enter Nothing To Stop): ";
 	std::string currentTag{};
@@ -124,32 +109,13 @@ void Book::editCity(int id, const std::string& newCity)
 		contact->setCity(newCity);
 }
 
-void Book::editType(int id, int typeAsInt)
+void Book::editType(int id, ContactType newType)
 {
 	Contact* contact = getContactById(id);
 	if (contact == nullptr)
 		std::cout << "Error: Invalid Id\n";
 	else
-	{
-		switch (typeAsInt)
-		{
-		case 1:
-			contact->setType(ContactType::Person);
-			break;
-		case 2:
-			contact->setType(ContactType::Business);
-			break;
-		case 3:
-			contact->setType(ContactType::Vendor);
-			break;
-		case 4:
-			contact->setType(ContactType::Emergency);
-			break;
-		default:
-			std::cout << "Error: Invalid Type\n";
-			break;
-		}
-	}
+                contact->setType(newType);
 }
 
 // ----------------
@@ -201,14 +167,15 @@ void Book::listContactsByType(ContactType type)const
 
 void Book::showContactsMissingInfo()const
 {
+        std::cout << "\nContacts with Missing Info\n-------------------------\n";
 	for (const Contact& contact : contacts)
 	{
-		if (contact.getEmail().empty() || contact.getPhoneNumber().empty() ||
-			contact.getCity().empty())
+		if (contact.getCity() == "" || contact.getEmail() == "" || contact.getId() == -1 || contact.getName() == "" || contact.getPhoneNumber() == "")
 		{
-			std::cout << contact;
+                        std::cout << contact;
 		}
 	}
+        std::cout << std::endl;
 }
 
 void Book::displayGroupSummaries()const

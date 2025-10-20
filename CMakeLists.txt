@@ -10,6 +10,8 @@ set(PROJECT_SOURCES src/main.cpp
     src/Contact.cpp
     src/MenuInterface.h
     src/MenuInterface.cpp
-    src/Utils.h)
+    src/Utils.h
+    src/Utils.cpp
+)
 
 add_executable(execBinary ${PROJECT_SOURCES})

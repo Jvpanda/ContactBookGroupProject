@@ -2,7 +2,6 @@
 #define BOOK_H
 
 #include "Contact.h"
-#include "Utils.h"
 #include <type_traits>
 
 class Book
@@ -18,7 +17,7 @@ public:
 	void editEmail(int id, const std::string& newEmail);
 	void editPhoneNumber(int id, const std::string& newPhoneNumber);
 	void editCity(int id, const std::string& newCity);
-	void editType(int id, int typeAsInt);
+	void editType(int id, ContactType newType);
 
 	void deleteContact(int id);
 	void printIndividualDetails(int id)const;
