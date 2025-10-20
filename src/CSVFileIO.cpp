@@ -25,6 +25,8 @@ void CSVHandler::loadCSV(Book &currentBook) {
         stringstream lineSS(line);
 
         getline(lineSS, id, ',');
+        if(id == "")
+            id = "-1";
         getline(lineSS, name, ',');
         getline(lineSS, email, ',');
         getline(lineSS, phoneNumber, ',');
