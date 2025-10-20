@@ -16,7 +16,6 @@ class MenuInterface {
     private:
         Book currentBook;
 
-        ContactType getTypeFromInput();
         void searchMenu();
         void filterMenu();
         void editMenu();
