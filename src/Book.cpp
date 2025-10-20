@@ -171,9 +171,9 @@ void Book::showContactsMissingInfo()const
         std::cout << "ID < 0 means no valid ID could be found\n";
 	for (const Contact& contact : contacts)
 	{
-		if (contact.getCity() == "" || contact.getEmail() == "" || contact.getId() < 0 || contact.getName() == "" || contact.getPhoneNumber() == "")
+		if (contact.getEmail() == "" || contact.getPhoneNumber() == "")
 		{
-                        std::cout << contact;
+               std::cout << contact;
 		}
 	}
         std::cout << std::endl;
